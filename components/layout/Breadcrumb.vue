@@ -1,6 +1,7 @@
 <template>
   <nav v-if="breadcrumbs.length > 0" class="breadcrumb">
     <ol class="breadcrumb-list">
+      
       <li v-for="(crumb, index) in breadcrumbs" :key="crumb.path" class="breadcrumb-item">
         <NuxtLink 
           v-if="crumb.path && index < breadcrumbs.length - 1" 
@@ -20,6 +21,8 @@
           class="breadcrumb-separator" 
         />
       </li>
+
+      <ThemeToggle class="theme-toogle"/>
     </ol>
   </nav>
 </template>
@@ -72,6 +75,20 @@ const breadcrumbs = computed<Breadcrumb[]>(() => {
   /* margin-bottom: 2rem; */
 }
 
+.theme-toogle {
+position: absolute;
+right: 2.25rem;
+}
+
+@media (max-width: 768px) {
+  .theme-toogle {
+    display: none;
+  }
+  .breadcrumb {
+    display: none;
+}
+}
+
 .breadcrumb-list {
   display: flex;
   align-items: center;
@@ -86,6 +103,12 @@ const breadcrumbs = computed<Breadcrumb[]>(() => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .breadcrumb-item {
+    padding-left: 3rem;
+  }
 }
 
 .breadcrumb-link {
@@ -128,7 +151,7 @@ const breadcrumbs = computed<Breadcrumb[]>(() => {
   color: var(--text-helper);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .breadcrumb {
     padding: 0 0 1.25rem;
     margin-bottom: 1.5rem;

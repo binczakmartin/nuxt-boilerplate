@@ -8,10 +8,6 @@
         <span class="dashboard-sidebar__name">MyApp</span>
       </NuxtLink>
 
-      <div class="dashboard-sidebar__controls">
-        <ThemeToggle with-label />
-      </div>
-
       <!-- Navigation Menu -->
       <nav class="dashboard-sidebar__nav">
         <LayoutDashboardMenuItem
@@ -41,17 +37,6 @@
       </div>
     </div>
 
-    <!-- Mobile Toggle Button -->
-    <button
-      class="dashboard-sidebar__mobile-toggle"
-      aria-label="Toggle sidebar"
-      @click="toggleMobileSidebar"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 12h18M3 6h18M3 18h18" />
-      </svg>
-    </button>
-
     <!-- Mobile Drawer -->
     <LayoutMobileDrawer :is-open="mobileOpen" @close="closeMobileSidebar">
       <template #header>
@@ -60,9 +45,6 @@
           <span class="dashboard-sidebar__name">MyApp</span>
         </div>
 
-        <div class="dashboard-sidebar__drawer-controls">
-          <ThemeToggle with-label />
-        </div>
       </template>
 
       <nav class="dashboard-sidebar__mobile-nav">
@@ -98,17 +80,14 @@
 import { dashboardMenuItems } from '~/config/navigation'
 
 const { user, logout } = useAuth()
-const mobileOpen = ref(false)
+const route = useRoute()
+const mobileOpen = useState('dashboardMobileSidebarOpen', () => false)
 
 const userInitials = computed(() => {
   if (!user.value?.email) return '?'
   const email = user.value.email
   return email.charAt(0).toUpperCase()
 })
-
-const toggleMobileSidebar = () => {
-  mobileOpen.value = !mobileOpen.value
-}
 
 const closeMobileSidebar = () => {
   mobileOpen.value = false
@@ -122,6 +101,10 @@ const handleLogoutMobile = async () => {
   closeMobileSidebar()
   await logout()
 }
+
+watch(() => route.fullPath, () => {
+  closeMobileSidebar()
+})
 </script>
 
 <style scoped>
@@ -141,7 +124,7 @@ const handleLogoutMobile = async () => {
   box-shadow: var(--nav-shadow);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .dashboard-sidebar__desktop {
     display: flex;
   }
@@ -255,41 +238,6 @@ const handleLogoutMobile = async () => {
 .dashboard-sidebar__logout:hover {
   background: color-mix(in srgb, var(--text-primary) 8%, transparent);
   color: var(--text-primary);
-}
-
-.dashboard-sidebar__mobile-toggle {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 45;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  backdrop-filter: blur(16px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-}
-
-.dashboard-sidebar__mobile-toggle:hover {
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
-  border-color: var(--border-strong);
-}
-
-.dashboard-sidebar__mobile-toggle:active {
-  transform: scale(0.95);
-}
-
-@media (min-width: 1024px) {
-  .dashboard-sidebar__mobile-toggle {
-    display: none;
-  }
 }
 
 .dashboard-sidebar__drawer-brand {

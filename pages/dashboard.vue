@@ -500,7 +500,7 @@ time {
   margin-top: 0.5rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .playbook-list article,
   .activity-list article,
   .integration-grid article {

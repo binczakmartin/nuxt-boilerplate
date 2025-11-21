@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/eslint'],
   css: ['~/assets/css/theme.css'],
+  alias: {
+    'pixi.js': 'pixi.js/dist/pixi.mjs'
+  },
 
   runtimeConfig: {
     jwtSecret: process.env.JWT_SECRET,

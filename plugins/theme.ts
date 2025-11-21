@@ -48,7 +48,11 @@ export default defineNuxtPlugin(() => {
     style: [
       {
         id: 'theme-tokens',
-        innerHTML: `:root {${light}} .light {${light}} .dark {${dark}}`,
+        innerHTML: [
+          `:root {${light}}`,
+          `:root.light, :root[data-theme="light"] {${light}}`,
+          `:root.dark, :root[data-theme="dark"] {${dark}}`
+        ].join('\n'),
         tagPosition: 'head'
       }
     ]
@@ -64,9 +68,6 @@ export default defineNuxtPlugin(() => {
     const headerTheme = headers?.['sec-ch-prefers-color-scheme']
     const preferred: ThemeName = cookie.value || (headerTheme === 'dark' ? 'dark' : 'light')
 
-    useHead({
-      htmlAttrs: { class: preferred },
-      bodyAttrs: { 'data-theme': preferred }
-    })
+    useHead({ htmlAttrs: { class: preferred, 'data-theme': preferred } })
   }
 })

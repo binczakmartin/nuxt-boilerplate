@@ -21,7 +21,7 @@
   border-color: var(--border-strong);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .ui-card {
     border-radius: 16px;
     padding: 1.5rem;

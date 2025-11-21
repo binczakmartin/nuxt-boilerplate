@@ -17,6 +17,7 @@ export interface DashboardMenuItem {
 export const publicNavLinks: NavLink[] = [
   { label: 'Features', to: '/#features' },
   { label: 'Pricing', to: '/#pricing' },
+  { label: 'FAQ', to: '/#faq' },
 ]
 
 /**

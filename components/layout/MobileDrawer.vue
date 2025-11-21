@@ -105,6 +105,17 @@ onMounted(() => {
   animation: slideIn 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .mobile-drawer__panel {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    border-left: none;
+    border-radius: 0;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  }
+}
+
 .mobile-drawer__header {
   display: flex;
   align-items: center;

@@ -21,8 +21,7 @@
         </nav>
 
         <!-- Auth Buttons (Desktop) -->
-        <div class="app-navbar__actions">
-          <ThemeToggle />
+        <div class="app-navbar__actions app-navbar__desktop-right">
           <template v-if="user">
             <NuxtLink to="/dashboard" class="app-navbar__btn app-navbar__btn--secondary">
               Dashboard
@@ -35,22 +34,29 @@
             <NuxtLink to="/login" class="app-navbar__btn app-navbar__btn--ghost">
               Login
             </NuxtLink>
-            <NuxtLink to="/register" class="app-navbar__btn app-navbar__btn--primary">
-              Get Started
+            <NuxtLink to="/register" class="app-navbar__btn app-navbar__btn--ghost">
+              Register
             </NuxtLink>
           </template>
+          <ThemeToggle class="app-__theme-toggle"/>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button
-          class="app-navbar__burger"
-          aria-label="Toggle menu"
-          @click="toggleDrawer"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+
+
+        <div class="app-navbar__mobile-right">
+          <ThemeToggle class="app-navbar__theme-toggle"/>
+          <!-- Mobile Menu Button -->
+          <button
+            class="app-navbar__burger"
+            aria-label="Toggle menu"
+            @click="toggleDrawer"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+
       </div>
     </UContainer>
 
@@ -64,10 +70,6 @@
       </template>
 
       <nav class="app-navbar__drawer-nav">
-        <div class="app-navbar__drawer-toggle">
-          <ThemeToggle with-label />
-        </div>
-
         <NuxtLink
           v-for="link in publicNavLinks"
           :key="link.to"
@@ -95,6 +97,7 @@
             Logout
           </button>
         </template>
+
         <template v-else>
           <NuxtLink
             to="/login"
@@ -103,13 +106,16 @@
           >
             Login
           </NuxtLink>
+          
           <NuxtLink
             to="/register"
-            class="app-navbar__drawer-link app-navbar__drawer-link--primary"
+            class="app-navbar__drawer-link"
             @click="closeDrawer"
           >
-            Get Started
+            Register
           </NuxtLink>
+                  <div class="app-navbar__drawer-toggle">
+        </div>
         </template>
       </nav>
     </LayoutMobileDrawer>
@@ -239,7 +245,7 @@ watch(() => route.fullPath, () => {
 }
 
 .app-navbar__btn {
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem 0.45rem;
   border-radius: 8px;
   font-size: 0.9375rem;
   font-weight: 600;
@@ -252,13 +258,13 @@ watch(() => route.fullPath, () => {
 
 .app-navbar__btn--ghost {
   background: transparent;
-  border-color: var(--border);
+  /* border-color: var(--border); */
   color: var(--text-secondary);
 }
 
 .app-navbar__btn--ghost:hover {
-  border-color: var(--border-strong);
-  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  /* border-color: var(--border-strong); */
+  /* background: color-mix(in srgb, var(--text-primary) 6%, transparent); */
   color: var(--text-primary);
 }
 
@@ -325,6 +331,46 @@ watch(() => route.fullPath, () => {
 @media (min-width: 768px) {
   .app-navbar__burger {
     display: none;
+  }
+}
+
+.app-navbar__theme-toggle {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 8px;
+  /* background: var(--surface); */
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  padding-right: 15px;
+}
+
+.app-navbar__theme-toggle:hover {
+  /* background: color-mix(in srgb, var(--surface) 90%, transparent); */
+  /* border-color: var(--border-strong); */
+}
+
+.app-navbar__theme-toggle:active {
+  transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+  .app-navbar__theme-toggle {
+    display: none;
+  }
+}
+
+.app-navbar__mobile-right {
+  display: flex;
+  width: 100px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .app-navbar__mobile-right {
+    display: none;
+    width: 0px;
+    margin-left: 40px;
   }
 }
 

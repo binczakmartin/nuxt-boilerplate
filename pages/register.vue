@@ -1,4 +1,5 @@
 <template>
+  <AuroraBackground class="hero-aurora" />
   <AuthWrapper glow-position="left">
     <template #panel>
       <AuthPanelContent
@@ -68,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import AuroraBackground from '~/components/landing/backgrounds/InteractiveEnergyFlows.vue'
 const { register, loading } = useAuth()
 const router = useRouter()
 

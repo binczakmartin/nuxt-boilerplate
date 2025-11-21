@@ -1,521 +1,322 @@
 <template>
-  <div class="landing">
-    <section class="hero">
-      <UContainer>
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="hero-pill">
-              <span class="hero-dot" />
-              New Version Available
-            </span>
-            <h1>
-              Lorem ipsum dolor sit<br>amet consectetur.
-            </h1>
-            <p>
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </p>
-            <div class="hero-actions">
-              <NuxtLink to="/register">
-                <UiButton variant="primary">Start for free</UiButton>
-              </NuxtLink>
-              <NuxtLink to="/login">
-                <UiButton variant="ghost">Watch a demo</UiButton>
-              </NuxtLink>
-            </div>
-            <div class="hero-stats">
-              <article v-for="stat in stats" :key="stat.label" class="stat-box">
-                <strong>{{ stat.value }}</strong>
-                <span>{{ stat.label }}</span>
-              </article>
-            </div>
-          </div>
+  <DigitalHive />
+  <div class="landing-page">
+    <LandingHero
+      :eyebrow="heroEyebrow"
+      :title="heroTitle"
+      :subtitle="heroSubtitle"
+      :cta="primaryCta"
+      note="Sans carte bancaire • Onboarding guidé en 30 minutes"
+      :highlights="heroHighlights"
+      :stats="heroStats"
+      :streams="heroStreams"
+      :spotlight="heroSpotlight"
+    />
 
-          <div class="hero-panel">
-            <div class="panel-card revenue">
-              <header>
-                <span>Current Metric</span>
-                <p>$1.2M</p>
-              </header>
-              <div class="sparkline">
-                <span v-for="n in 14" :key="n" :style="{ height: `${30 + (n % 5) * 12}%` }" />
-              </div>
-              <footer>
-                <p class="positive">+12.4% this period</p>
-                <span>Data updated recently</span>
-              </footer>
-            </div>
-            <div class="panel-card tasks">
-              <h3>Important Items</h3>
-              <ul>
-                <li v-for="task in heroTasks" :key="task.label">
-                  <div>
-                    <p>{{ task.label }}</p>
-                    <small>{{ task.meta }}</small>
-                  </div>
-                  <span>{{ task.value }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <LandingProofBar
+      :logos="proofLogos"
+      :metrics="proofMetrics"
+      :rating="proofRating"
+    />
 
-        <div class="logo-row">
-          <span v-for="logo in logos" :key="logo">{{ logo }}</span>
-        </div>
-      </UContainer>
-    </section>
+    <LandingFeatures
+      eyebrow="Fonctionnalités clés"
+      title="Tout ce qu’il faut pour piloter vos relances sans friction"
+      description="Une plateforme qui orchestre les relances, alerte vos équipes et garde votre CRM parfaitement à jour."
+      :features="features"
+    />
 
-    <section class="feature-stack">
-      <UContainer>
-        <header class="section-heading">
-          <p>Our Features</p>
-          <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit.</h2>
-        </header>
-        <div class="feature-grid">
-          <article v-for="feature in features" :key="feature.title" class="feature-card">
-            <div class="feature-icon" :style="{ '--clr': feature.color }">
-              <span class="icon-placeholder">{{ feature.icon }}</span>
-            </div>
-            <div>
-              <h3>{{ feature.title }}</h3>
-              <p>{{ feature.description }}</p>
-            </div>
-            <div class="feature-meta">
-              <span v-for="chip in feature.chips" :key="chip">{{ chip }}</span>
-            </div>
-          </article>
-        </div>
-      </UContainer>
-    </section>
+    <LandingBenefits
+      eyebrow="Proposition de valeur"
+      title="Pourquoi choisir MyApp pour vos relances B2B ?"
+      description="Chaque bloc est pensé pour réduire la friction : tout est prêt, connecté à votre CRM et optimisé pour que vos équipes passent moins de temps à relancer et plus à signer."
+      :benefits="benefits"
+    />
 
-    <section class="workflow">
-      <UContainer>
-        <header class="section-heading">
-          <p>How It Works</p>
-          <h2>Simple process in three easy steps.</h2>
-        </header>
+    <LandingHowItWorks
+      eyebrow="Comment ça marche"
+      title="3 étapes pour lancer vos relances sans tableur"
+      description="Pas de bricolage : on connecte vos outils, on active un playbook validé et vous suivez les résultats en direct."
+      :steps="steps"
+    />
 
-        <div class="workflow-grid">
-          <article v-for="(stage, idx) in workflow" :key="stage.title" class="workflow-card">
-            <span class="badge">0{{ idx + 1 }}</span>
-            <div class="workflow-body">
-              <h3>{{ stage.title }}</h3>
-              <p>{{ stage.description }}</p>
-              <ul>
-                <li v-for="item in stage.points" :key="item">{{ item }}</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </UContainer>
-    </section>
+    <LandingSocialProof
+      eyebrow="Preuve sociale"
+      title="Ils ont supprimé la friction dans leurs relances"
+      description="Des équipes sales, success et growth qui ont besoin de visibilité et d'actions guidées chaque jour."
+      :testimonials="testimonials"
+    />
+
+    <LandingPricing
+      eyebrow="Offre"
+      title="Un seul objectif : lancer vos playbooks rapidement"
+      description="Choisissez le plan qui vous correspond. Même CTA partout pour garder l'objectif clair."
+      :plans="plans"
+    />
+
+    <LandingFAQ
+      eyebrow="Objections fréquentes"
+      title="On répond avant que vous ne posiez la question"
+      description="Tarifs, délai de mise en route, sécurité : voici les réponses rapides pour décider sereinement."
+      note="Un CSM vous accompagne sur les 30 premiers jours pour garantir un déploiement sans friction."
+      :faqs="faqs"
+    />
+
+    <LandingFinalCTA
+      eyebrow="On se lance ?"
+      title="Essayez MyApp et gagnez vos prochaines signatures dès cette semaine."
+      description="Connectez votre CRM, choisissez un playbook, la plateforme s’occupe des relances et des rappels."
+      :points="finalPoints"
+      :cta="primaryCta"
+      note="Sans carte bancaire • Annulation en 1 clic"
+    />
+
+    <LandingFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-const stats = [
-  { value: '1.2k', label: 'Users' },
-  { value: '95%', label: 'Satisfaction' },
-  { value: '24/7', label: 'Support' }
+import DigitalHive from '~/components/landing/backgrounds/DigitalHive.vue'
+import LandingBenefits from '~/components/landing/LandingBenefits.vue'
+import LandingFAQ from '~/components/landing/LandingFAQ.vue'
+import LandingFinalCTA from '~/components/landing/LandingFinalCTA.vue'
+import LandingFooter from '~/components/landing/LandingFooter.vue'
+import LandingHero from '~/components/landing/LandingHero.vue'
+import LandingHowItWorks from '~/components/landing/LandingHowItWorks.vue'
+import LandingPricing from '~/components/landing/LandingPricing.vue'
+import LandingFeatures from '~/components/landing/LandingFeatures.vue'
+import LandingProofBar from '~/components/landing/LandingProofBar.vue'
+import LandingSocialProof from '~/components/landing/LandingSocialProof.vue'
+
+const primaryCta = { label: 'Essayer gratuitement', to: '/register' }
+const heroEyebrow = 'Nouveau : playbooks prêts en 10 minutes'
+const heroTitle = 'Obtenez des relances qui convertissent<br>sans tableur ni copier-coller.'
+const heroSubtitle = 'MyApp orchestre vos suivis B2B : connectez votre CRM, activez un playbook validé et laissez la plateforme personnaliser chaque relance au bon moment.'
+
+const heroHighlights = [
+  { title: 'Playbooks prêts', detail: 'Séquences validées pour chaque scénario B2B.', icon: '🚀' },
+  { title: 'Sync CRM', detail: 'Pas de double saisie, scoring et tâches auto.', icon: '🔄' },
+  { title: 'Signaux chauds', detail: 'Alertes Slack quand un deal chauffe ou décroche.', icon: '⚡' }
 ]
 
-const heroTasks = [
-  { label: 'Feature Update', meta: 'New improvements available', value: 'View' },
-  { label: 'User Activity', meta: 'Recent interactions tracked', value: 'Details' },
-  { label: 'System Status', meta: 'All systems operational', value: 'Check' }
+const heroStats = [
+  { label: 'Temps gagné', value: '-12 h/sem', hint: 'Relances automatisées + rappels Slack' },
+  { label: 'Réponses en plus', value: '+34%', hint: 'Objets optimisés + personnalisation CRM' },
+  { label: 'Mise en route', value: '24 h', hint: 'Onboarding guidé, sans carte bancaire' }
 ]
 
-const logos = ['Company A', 'Company B', 'Company C', 'Company D', 'Company E']
+const heroStreams = [
+  { title: 'Lisa • Inbound PME', status: 'Prêt à envoyer', time: 'Séquence 4 · Jour 3' },
+  { title: 'Dylan • Relance devis', status: 'En attente de validation', time: 'Séquence 2 · Jour 1' },
+  { title: 'Allan • POC en cours', status: 'Envoyé + rappel prévu', time: 'Séquence 5 · Jour 6' }
+]
+
+const heroSpotlight = {
+  metric: 'Taux de réponse moyen',
+  value: '38%',
+  delta: '+6 pts vs dernier mois'
+}
+
+const proofLogos = ['Solstice', 'Northwind', 'Helios', 'AtlasPay', 'Nira', 'Krescendo']
+const proofMetrics = [
+  { value: '+2 400', label: 'équipes B2B', detail: 'Sales, success et growth' },
+  { value: '34%', label: 'de temps gagné', detail: 'en moyenne après 30 jours' }
+]
+const proofRating = { score: '4.8', detail: 'Score moyen G2 et Capterra' }
 
 const features = [
   {
-    title: 'First Feature',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.',
-    chips: ['Tag 1', 'Tag 2'],
-    color: '#000000',
-    icon: '🌐'
+    title: 'Orchestration multi-canal',
+    description: 'Emails, tâches LinkedIn et rappels téléphoniques déclenchés au bon moment selon le pipeline.',
+    icon: 'i-heroicons-sparkles',
+    tag: 'Playbooks',
+    points: ['Templates validés par des équipes B2B', 'Timing optimisé sur chaque étape']
   },
   {
-    title: 'Second Feature',
-    description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
-    chips: ['Tag 3', 'Tag 4'],
-    color: '#6366f1',
-    icon: '✨'
+    title: 'Sync CRM en temps réel',
+    description: 'Mises à jour et logs automatiques : plus de copie/coller ni d’oublis dans HubSpot, Pipedrive ou Salesforce.',
+    icon: 'i-heroicons-arrow-path-rounded-square',
+    tag: 'Ops',
+    points: ['Création de tâches et champs custom', 'Suppression auto des contacts hors opt-in']
   },
   {
-    title: 'Third Feature',
-    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.',
-    chips: ['Tag 5', 'Tag 6'],
-    color: '#10b981',
-    icon: '⚡'
+    title: 'Alertes sur les signaux chauds',
+    description: 'Slack et email préviennent l’équipe quand un prospect ouvre, clique ou répond.',
+    icon: 'i-heroicons-bell-alert',
+    points: ['Scores de priorité mis à jour en continu', 'Notifications ciblées par équipe']
   },
   {
-    title: 'Fourth Feature',
-    description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.',
-    chips: ['Tag 7', 'Tag 8'],
-    color: '#f59e0b',
-    icon: '🔒'
+    title: 'IA de personnalisation prête à l’emploi',
+    description: 'Résumé des fiches CRM, suggestions d’angles et rédaction contextualisée en un clic.',
+    icon: 'i-heroicons-cpu-chip',
+    tag: 'Assistant IA',
+    points: ['Ton ajustable par persona', 'Contrôles humains avant envoi']
+  },
+  {
+    title: 'Vue équipe et market fit',
+    description: 'Dashboards prêts : suivi par segment, par séquence et par AE.',
+    icon: 'i-heroicons-chart-bar-square',
+    points: ['KPIs temps réel', 'Comparaison des playbooks actifs']
+  },
+  {
+    title: 'Sécurité & conformité natives',
+    description: 'Hébergement UE, permissions granulaires et audit trail complet pour chaque action.',
+    icon: 'i-heroicons-shield-check',
+    tag: 'Confiance',
+    points: ['Gestion fine des rôles', 'Exports sécurisés sur demande']
   }
 ]
 
-const workflow = [
+const benefits = [
   {
-    title: 'Step One',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.',
-    points: ['Point alpha', 'Point beta', 'Point gamma']
+    title: 'Réduisez le temps de relance de 60%',
+    description: 'Playbooks prêts pour chaque moment du cycle : devis, POC, renouvellement, relances inbound.',
+    proof: '10 minutes pour lancer une séquence complète.',
+    icon: '⏱️'
   },
   {
-    title: 'Step Two',
-    description: 'Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.',
-    points: ['Point delta', 'Point epsilon', 'Point zeta']
+    title: 'Personnalisation sans tableur',
+    description: 'L’IA résume la fiche CRM, détecte les signaux clés et génère les messages contextualisés.',
+    proof: '+34% de réponses sur les campagnes personnalisées.',
+    icon: '🧠'
   },
   {
-    title: 'Step Three',
-    description: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
-    points: ['Point eta', 'Point theta', 'Point iota']
+    title: 'Priorités claires pour les SDR',
+    description: 'Scoring en temps réel, tasks auto et alertes Slack pour concentrer l’équipe là où ça chauffe.',
+    proof: 'Vos 10 deals les plus chauds chaque matin.',
+    icon: '🎯'
+  },
+  {
+    title: 'Ops et conformité sereines',
+    description: 'Sync bidirectionnelle avec votre CRM, gestion des opt-in, suppression automatique sur demande.',
+    proof: 'Aucune double saisie ni contact hors opt-in.',
+    icon: '🛡️'
   }
+]
+
+const steps = [
+  {
+    tag: 'Étape 1',
+    title: 'Connectez vos outils',
+    text: 'HubSpot, Pipedrive, Salesforce ou votre CRM maison via API.',
+    points: ['Import des contacts et deals en 1 clic', 'Nettoyage automatique des doublons', 'Scoring activé dès la synchro']
+  },
+  {
+    tag: 'Étape 2',
+    title: 'Choisissez un playbook validé',
+    text: 'Séquences emails, LinkedIn et tâches manuelles prêtes pour chaque cas.',
+    points: ['Templates validés par des équipes B2B', 'Personnalisation générée à partir du CRM', 'Timing optimisé selon votre cycle']
+  },
+  {
+    tag: 'Étape 3',
+    title: 'Suivez les résultats en direct',
+    text: 'La plateforme relance, notifie et met à jour votre CRM pour vous.',
+    points: ['Alertes sur les signaux chauds', 'Dashboard par équipe et par marché', 'Recommandations d’étapes suivantes']
+  }
+]
+
+const testimonials = [
+  {
+    quote: 'On a doublé nos prises de RDV en 6 semaines sans recruter.',
+    result: '+52% de réponses sur les séquences multi-canal',
+    name: 'Claire Dumont',
+    role: 'Head of Sales, Alto'
+  },
+  {
+    quote: 'Les SDR savent quoi faire chaque matin, les relances sont déjà prêtes.',
+    result: '-11 h par semaine de tâches répétitives',
+    name: 'Yanis Karim',
+    role: 'CEO, Neostack'
+  },
+  {
+    quote: 'On a enfin une vue fiable des relances en cours et de leur impact.',
+    result: '+18% de conversion MQL > SQL en 2 mois',
+    name: 'Leila Haddad',
+    role: 'RevOps, NovaTech'
+  }
+]
+
+const faqs = [
+  {
+    question: 'Combien de temps pour démarrer ?',
+    answer: 'En moins de 30 minutes : connexion CRM, import des modèles si besoin et activation d’un playbook.'
+  },
+  {
+    question: 'Quelles intégrations sont disponibles ?',
+    answer: 'HubSpot, Pipedrive, Salesforce, Google Sheets, Zapier et webhooks pour vos outils internes.'
+  },
+  {
+    question: 'Puis-je garder mes modèles existants ?',
+    answer: 'Oui, import Markdown ou CSV. On vous aide à les convertir en playbooks avec personnalisation automatique.'
+  },
+  {
+    question: 'Et la conformité / RGPD ?',
+    answer: 'Données hébergées dans l’UE, logs complets, suppression automatique sur demande et gestion fine des opt-in.'
+  },
+  {
+    question: 'Y a-t-il un engagement ?',
+    answer: 'Non. Essai gratuit, puis abonnement mensuel. Annulation en un clic depuis l’espace client.'
+  },
+  {
+    question: 'Comment êtes-vous différent d’un simple outil d’e-mailing ?',
+    answer: 'Nous pilotons la relance multi-canal, synchronisée au CRM et avec scoring temps réel. L’outil d’e-mailing est juste un des canaux.'
+  }
+]
+
+const plans = [
+  {
+    name: 'Starter',
+    description: 'Pour lancer vos premiers playbooks avec une petite équipe.',
+    price: '39€',
+    period: '/utilisateur/mois',
+    features: [
+      'Séquences illimitées email + LinkedIn',
+      'Connecteurs HubSpot & Pipedrive',
+      'Scoring deals chauds + alertes',
+      'Support email et base de connaissances'
+    ],
+    note: 'Idéal pour 1 à 3 personnes.',
+    cta: primaryCta
+  },
+  {
+    name: 'Growth',
+    description: 'Pour les équipes qui relancent à grande échelle.',
+    price: '89€',
+    period: '/utilisateur/mois',
+    features: [
+      'Playbooks multi-équipes + rôles',
+      'Salesforce & webhooks personnalisés',
+      'Insights en temps réel + alertes Slack',
+      'CSM dédié et atelier onboarding'
+    ],
+    note: 'Support prioritaire inclus.',
+    popular: true,
+    cta: primaryCta
+  }
+]
+
+const finalPoints = [
+  'Playbooks prêts pour relancer dès aujourd’hui',
+  'Personnalisation automatique sans tableur',
+  'Support humain en français'
 ]
 </script>
 
 <style scoped>
-.landing {
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+.landing-page {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 6vw, 5.5rem);
+  /* gap: clamp(1.5rem, 3vw, 2.5rem); */
+  /* padding-bottom: 2rem; */
 }
 
-.hero {
-  padding: clamp(2.5rem, 6vw, 4rem) 0;
-}
-
-.hero-grid {
-  display: grid;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  align-items: center;
-}
-
-.hero-copy h1 {
-  font-size: clamp(2.2rem, 4vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-  margin: 1rem 0;
-  color: var(--text-primary);
-}
-
-.hero-copy p {
-  color: var(--text-secondary);
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  line-height: 1.6;
-  max-width: 36rem;
-}
-
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface-muted);
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.hero-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--state-success);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--state-success) 70%, transparent);
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin: 1.5rem 0;
-}
-
-.hero-actions a {
-  text-decoration: none;
-}
-
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.stat-box {
-  padding: 1.1rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
-}
-
-.stat-box strong {
-  display: block;
-  font-size: 1.7rem;
-  color: var(--text-primary);
-}
-
-.stat-box span {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.hero-panel {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.panel-card {
-  border-radius: 1.75rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-strong);
-}
-
-.panel-card.revenue header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  color: var(--text-secondary);
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.panel-card.revenue header p {
-  font-size: 2.2rem;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.sparkline {
-  display: flex;
-  gap: 0.4rem;
-  margin: 1.2rem 0;
-  align-items: flex-end;
-  height: 80px;
-}
-
-.sparkline span {
-  flex: 1;
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent) 70%, transparent),
-    color-mix(in srgb, var(--state-success) 45%, transparent)
-  );
-}
-
-.panel-card footer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.panel-card footer p {
-  margin: 0;
-}
-
-.positive {
-  color: var(--state-success) !important;
-  font-weight: 600;
-}
-
-.panel-card.tasks h3 {
-  margin: 0 0 1rem;
-  color: var(--text-primary);
-}
-
-.panel-card.tasks ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  list-style: none;
+:global(.app-content) {
   padding: 0;
   margin: 0;
-}
-
-.panel-card.tasks li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
-
-.panel-card.tasks li p {
-  margin: 0 0 0.25rem;
-}
-
-.panel-card.tasks small {
-  color: var(--text-helper);
-  font-size: 0.85rem;
-}
-
-.panel-card.tasks span {
-  color: var(--accent-strong);
-  white-space: nowrap;
-  font-size: 0.85rem;
-}
-
-.logo-row {
-  margin-top: clamp(2rem, 5vw, 3rem);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  justify-content: center;
-  color: var(--text-helper);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  font-size: 0.95rem;
-}
-
-.feature-stack {
-  padding: clamp(2.5rem, 6vw, 4rem) 0;
-}
-
-.section-heading {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto 3rem;
-}
-
-.section-heading p {
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-  color: var(--accent-strong);
-  font-size: 0.82rem;
-  margin: 0 0 1rem;
-}
-
-.section-heading h2 {
-  font-size: clamp(1.7rem, 3vw, 2.8rem);
-  color: var(--text-primary);
-  line-height: 1.2;
-  margin: 0;
-}
-
-.feature-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-}
-
-.feature-card {
-  padding: 1.5rem;
-  border-radius: 1.5rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.feature-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: color-mix(in srgb, var(--clr), transparent 45%);
-  border: 1px solid color-mix(in srgb, var(--clr), white 35%);
-  font-size: 1.3rem;
-}
-
-.feature-card h3 {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 1.25rem;
-}
-
-.feature-card p {
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.feature-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.feature-meta span {
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  padding: 0.25rem 0.85rem;
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-}
-
-.workflow {
-  padding-bottom: clamp(3rem, 6vw, 4.5rem);
-}
-
-.workflow-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-}
-
-.workflow-card {
-  padding: 1.4rem;
-  border-radius: 1.5rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  display: flex;
-  gap: 1rem;
-}
-
-.workflow-card .badge {
-  align-self: flex-start;
-  border-radius: 0.9rem;
-  border: 1px solid var(--border-strong);
-  padding: 0.25rem 0.7rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-}
-
-.workflow-body h3 {
-  margin: 0 0 0.5rem;
-  color: var(--text-primary);
-}
-
-.workflow-body p {
-  margin: 0 0 0.75rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.workflow-body ul {
-  list-style: disc;
-  padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin: 0;
-  color: var(--text-secondary);
-}
-
-@media (max-width: 768px) {
-  .hero-panel {
-    order: -1;
-  }
-
-  .workflow-card {
-    flex-direction: column;
-  }
+  width: 100%;
+  max-width: 100%;
 }
 </style>

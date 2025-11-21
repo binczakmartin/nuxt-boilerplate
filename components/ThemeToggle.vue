@@ -47,20 +47,20 @@ const ariaLabel = computed(() => {
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
+  gap: 0.25rem;
+  /* padding: 0.5rem 0.75rem; */
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface-muted);
+  /* border: 1px solid var(--border);
+  background: var(--surface-muted); */
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-soft);
+  /* transition: all 0.2s ease; */
+  /* box-shadow: var(--shadow-soft); */
 }
 
 .theme-toggle:hover {
   border-color: var(--border-strong);
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  /* background: color-mix(in srgb, var(--surface) 90%, transparent); */
 }
 
 .theme-toggle:active {

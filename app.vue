@@ -4,6 +4,7 @@
     <template v-if="isDashboard">
       <LayoutDashboardSidebar />
       <main class="dashboard-main">
+        <LayoutDashboardMobileNavbar />
         <LayoutBreadcrumb />
         <NuxtPage />
       </main>
@@ -52,9 +53,9 @@ const isDashboard = computed(() => {
 }
 
 .app-content {
-  width: min(1400px, 100%);
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(1.5rem, 3vw, 3rem);
+  /* padding: clamp(1.5rem, 3vw, 3rem); */
 }
 
 @media (max-width: 640px) {
@@ -71,15 +72,15 @@ const isDashboard = computed(() => {
   min-height: 100vh;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .dashboard-main {
     margin-left: 280px;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
   .dashboard-main {
-    padding: 5rem 1.5rem 2rem;
+    padding: 1.5rem 1.5rem 2rem;
   }
 }
 </style>
